@@ -1,0 +1,23 @@
+version: "3.9"
+
+services: 
+  django-backend:
+    restart: always
+    build:
+      context: ./django-backend # django service folder
+    image: djangobackend # name the resulted image: https://docs.docker.com/compose/compose-file/compose-file-v3/#build
+ 
+  postgresql-db:
+    restart: always
+    image: postgres
+    env_file: ./postgresql-db/.pg-env
+ 
+  nginx:
+    restart: always
+    build:
+        context: ./nginx
+    ports:
+    - "80:80"
+
+
+# ...
